@@ -20,6 +20,14 @@ function titleCase(word) {
     return word[0].toUpperCase() + word.slice(1)
 }
 
+function capsEachWord (str) {
+    str = str.toLowerCase().split(' ');
+    for (var i = 0; i < str.length; i++) {
+        str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+    }
+    return str.join(' ');
+};
+
 class Customer {
     constructor(customerInfo) {
         this.info = customerInfo
@@ -40,9 +48,9 @@ class Customer {
     }
 
     getLocation() {
-        return titleCase(this.info.location.street) + '\n'+ ' ' +
-        titleCase(this.info.location.city) + ', ' +
-        titleCase(this.info.location.state) + ' ' +
+        return capsEachWord(this.info.location.street) + '\n'+ ' ' +
+        capsEachWord(this.info.location.city) + ', ' +
+        capsEachWord(this.info.location.state) + ' ' +
         (this.info.location.postcode)
     }
 
@@ -52,20 +60,18 @@ class Customer {
 
 
     generateDOM() {
+
         let div = document.createElement('div')
         div.classList.add('customer')
 
-        let nameH2 = document.createElement('h2')
+        let photo = document.createElement('img')
+        photo.src = this.info.picture.large
+
+        let nameH2 = document.createElement('h5')
         nameH2.innerText = this.getName()
 
         let email = document.createElement('p')
         email.innerText = this.getEmail()
-
-        let dates = document.createElement('p')
-        dates.innerText = this.getDates()
-
-        let photo = document.createElement('img')
-        photo.src = this.info.picture.large
 
         let location = document.createElement('p')
         location.innerText = this.getLocation()
@@ -73,11 +79,14 @@ class Customer {
         let CustomerSince = document.createElement('p')
         CustomerSince.innerText = this.getCustomerSince()
 
+        let dates = document.createElement('p')
+        dates.innerText = this.getDates()
+
+        div.appendChild(photo)
         div.appendChild(nameH2)
         div.appendChild(email)
-        div.appendChild(dates)
-        div.appendChild(photo)
         div.appendChild(location)
+        div.appendChild(dates)
 
         return div
     }
