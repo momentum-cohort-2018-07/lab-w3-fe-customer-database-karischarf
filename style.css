@@ -1,0 +1,15 @@
+.row {
+  margin: 25%;
+}
+
+h3 {
+  font-weight: bold;
+}
+
+p {
+  font-style: italic;
+}
+
+img {
+    border-radius: 50%;
+}
